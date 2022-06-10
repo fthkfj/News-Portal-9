@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% load censor %}
+
+{% block title %}
+news
+{% endblock title %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<hr>
+<h3>{{ post.text|censor }}</h3>
+<p></p>
+
+<body>
+    <form action="{% url 'post_create' post.id %}">
+        <button>Редактировать</button></form>
+    <form action="{% url 'post_delete' post.id %}">
+        <button>Удалить</button>
+
+    </form>
+</body>
+{% endblock content %}

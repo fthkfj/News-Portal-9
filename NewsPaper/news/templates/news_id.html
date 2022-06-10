@@ -1,0 +1,35 @@
+{% extends 'flatpages/default.html' %}
+
+{% load censor %}
+
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+   <h1>Статья</h1>
+   <h3>{{time_now|date:'d M Y H:i'}}</h3>
+
+   {% if news_id %}
+       <table>
+           <tr>
+               <td>Заголовок</td>
+               <td>Дата загрузки</td>
+               <td>Текст</td>
+           </tr>
+
+           <tr>
+
+               <td>{{news_id.title}}</td>
+               <td>{{news_id.DateCreation|date:'d M Y H:i'}}</td>
+               <td>{{news_id.text|censor}}</td>
+
+           </tr>
+                <a href="{% url 'subscribe' %}"><input type="submit" value="Подписаться"></a>
+
+       </table>
+   {% else %}
+       <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}

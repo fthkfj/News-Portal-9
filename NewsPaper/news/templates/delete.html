@@ -1,0 +1,47 @@
+{% extends 'flatpages/default.html' %}
+
+{% load censor %}
+
+{% block title %}
+news
+{% endblock title %}
+
+
+{% block content %}
+<h2>Вы действительно хотите удалить пост?</h2>
+{% if news %}
+        <table style="margin-left: auto; margin-right: auto;">
+            <thead>
+                <td>
+                    Название
+                </td>
+                <td>
+                    Дата загрузки
+                </td>
+                <td>
+                    Текст
+                </td>
+            </thead>
+            <tr>
+                <td>
+                    {{post.title}}
+                </td>
+                <td>
+                    {{post.DateCreation|date:'d M Y H:i'}}
+                </td>
+                <td>
+                    {{post.text|censor|truncatechars:20}}
+                </td>
+            </tr>
+        </table>
+{% endif %}
+    <form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Подтвердить">
+     <button>Отмена</button>
+   </form>
+{% endblock content %}
+
+
+
+
